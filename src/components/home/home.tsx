@@ -1,6 +1,6 @@
 import BlocksVisualizer from "../blocksVisualizer/blocksVisualizer"
-import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
+import { CreateBookmark } from "../createBookmark/createBookmark"
 
 
 export default function Home () {
@@ -8,12 +8,26 @@ export default function Home () {
         {
             cardTitle: "Titulo",
             cardDescription: "Descricao",
-            cardContent: "Conteúdo aqui"
+            cardContent: "Conteúdo aqui",
+            lastModification: "2025-04-08T14:30:00.000Z"
         },
         {
             cardTitle: "Titulo2",
             cardDescription: "Descricao2",
-            cardContent: "Conteúdo aqui2"
+            cardContent: "Conteúdo aqui2",
+            lastModification: "2025-04-01T14:30:00.000Z"
+        },
+        {
+            cardTitle: "Titulo3",
+            cardDescription: "Descricao2",
+            cardContent: "Conteúdo aqui2",
+            lastModification: "2025-04-09T14:30:00.000Z"
+        },
+        {
+            cardTitle: "Titulo4",
+            cardDescription: "Descricao2",
+            cardContent: "Conteúdo aqui2",
+            lastModification: "2024-11-15T14:30:00.000Z"
         },
     ]
 
@@ -23,10 +37,9 @@ export default function Home () {
             <Separator></Separator>
             <BlocksVisualizer
                 blocks={blocks}
-            />
-            <div className="self-end justify-self-end">
-                <Button variant={'default'}>Criar bookmark</Button>
-            </div>    
+            />  
+            
+            <CreateBookmark/>
         </div>
     )
 }
