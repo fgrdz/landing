@@ -1,5 +1,3 @@
-"use client";
-
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose, DialogFooter } from "../ui/dialog";
 import { Button } from "../ui/button";
 

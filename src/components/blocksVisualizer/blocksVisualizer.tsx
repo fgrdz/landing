@@ -3,6 +3,7 @@ import Block from "../block/block";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
+import { Folders } from "../folders/folders";
 
 interface BlocksVisualizerProps {
   blocks: BlockProps[];
@@ -17,7 +18,7 @@ export default function BlocksVisualizer({ blocks }: BlocksVisualizerProps) {
         <Tabs defaultValue="recent" className="w-full">
         <TabsList className="w-full justify-start">
           <TabsTrigger value="recent" defaultChecked>Recentes</TabsTrigger>
-          <TabsTrigger value="saved">Pastas</TabsTrigger>
+          <TabsTrigger value="folders">Pastas</TabsTrigger>
           <TabsTrigger value="archived">Arquivados</TabsTrigger>
         </TabsList>
 
@@ -34,6 +35,10 @@ export default function BlocksVisualizer({ blocks }: BlocksVisualizerProps) {
               lastModification={block.lastModification}
             />
           ))}
+        </TabsContent>
+
+        <TabsContent value="folders">
+          <Folders/>
         </TabsContent>
         </Tabs>
         </div>
