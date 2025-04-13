@@ -1,4 +1,4 @@
-import { BlockProps } from "@/types/interfaces";
+import { Bookmark } from "@/types/interfaces";
 import Block from "../block/block";
 import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
@@ -6,7 +6,7 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import { Folders } from "../folders/folders";
 
 interface BlocksVisualizerProps {
-  blocks: BlockProps[];
+  blocks: Bookmark[];
 }
 
 export default function BlocksVisualizer({ blocks }: BlocksVisualizerProps) {

@@ -1,14 +1,12 @@
 import { FolderArchiveIcon } from "lucide-react";
 import { useState } from "react";
 import Folder from "../folder/folder";
+import { IFolder } from "@/types/interfaces";
 
-interface IFolder {
-  id: string; 
-  name: string;
-}
+
 
 export function Folders() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const folders: IFolder[] = [
     {
       id: "folder-1",
