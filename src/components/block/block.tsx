@@ -1,20 +1,20 @@
-import { BlockProps } from "@/types/interfaces";
+import { IBookmark } from "@/types/interfaces";
 import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
 
 
-export default function Block({ cardTitle, cardDescription, cardContent }: BlockProps){
+export default function Block({ title, description, url }: IBookmark){
     
     return (
         <Card className="mb-3 w-lg h-[200px] bg-transparent">
             <CardHeader>
-                <p className="text-lg">{cardTitle}</p>
+                <p className="text-lg">{title}</p>
                 <CardDescription>
-                    <p> {cardDescription} </p>
+                    <p> {description} </p>
                 </CardDescription>
             </CardHeader>
             <div className="p-2">
             <CardContent className="h-[70px] border-2 border-dashed border-border rounded-md flex items-center cursor-pointer hover:bg-secondary">
-                {cardContent}
+                {url}
             </CardContent>
             </div>
         </Card>

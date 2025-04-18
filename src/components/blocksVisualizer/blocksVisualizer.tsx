@@ -1,15 +1,14 @@
-import { Bookmark } from "@/types/interfaces";
 import Block from "../block/block";
-import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { Folders } from "../folders/folders";
+import { useStore } from "@/hooks/store";
 
-interface BlocksVisualizerProps {
-  blocks: Bookmark[];
-}
 
-export default function BlocksVisualizer({ blocks }: BlocksVisualizerProps) {
+
+export default function BlocksVisualizer() {
+  const blocks = useStore((state) => state.bookmarks);
+
   return (
     <div className="space-y-2 relative">
       <p className="text-foreground">Bookmarks</p>
@@ -24,19 +23,23 @@ export default function BlocksVisualizer({ blocks }: BlocksVisualizerProps) {
 
         <TabsContent value="recent">
         {blocks
-          .filter(block => block.lastModification)
-          .sort((a,b) =>  new Date(b.lastModification).getTime() - new Date(a.lastModification).getTime())
-          .map((block, index) => (                
+          .filter((block): block is { lastModification: string } & typeof block => 
+            !!block.lastModification
+          )
+          .sort((a, b) => 
+            new Date(b.lastModification).getTime() - new Date(a.lastModification).getTime()
+          )
+          .map((block) => (                
             <Block
-              key={index}             
-              cardTitle={block.cardTitle}
-              cardContent={block.cardContent}
-              cardDescription={block.cardDescription}
+              key={block.id} 
+              title={block.title}
+              url={block.url}
+              description={block.description}
               lastModification={block.lastModification}
             />
           ))}
         </TabsContent>
-
+        {/* folders */}
         <TabsContent value="folders">
           <Folders/>
         </TabsContent>

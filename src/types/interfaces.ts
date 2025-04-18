@@ -1,23 +1,22 @@
-export interface Bookmark {
-    id: number;
-    cardTitle: string;
-    cardDescription?: string;
-    cardContent: string;
-    lastModification: string;
-    folder?: string;
-}
-
 export interface IFolder {
-    id: string; 
+    id: string;
     name: string;
-}
-
-export interface AppState {
+  }
+  
+  export interface IBookmark {
+    id?: string; 
+    title: string; 
+    url: string;   
+    description?: string; 
+    folderId?: string; 
+    lastModification?: string;
+  }
+  
+  export interface AppState {
     folders: IFolder[];
-    bookmarks: Bookmark[];
+    bookmarks: IBookmark[];
     addFolder: (folder: Omit<IFolder, 'id'>) => void;
-    addBookmark: (bookmark: Omit<Bookmark, 'id' | 'lastModification'>) => void;
+    addBookmark: (bookmark: Omit<IBookmark, 'id' | 'lastModification'>) => void;
     deleteFolder: (id: string) => void;
     deleteBookmark: (id: string) => void;
   }
-  

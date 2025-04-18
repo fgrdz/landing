@@ -1,22 +1,13 @@
 import { FolderArchiveIcon } from "lucide-react";
 import { useState } from "react";
 import Folder from "../folder/folder";
-import { IFolder } from "@/types/interfaces";
+import { useStore } from "@/hooks/store";
 
 
 
 export function Folders() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const folders: IFolder[] = [
-    {
-      id: "folder-1",
-      name: "Pasta1"
-    },
-    {
-      id: "folder-2",
-      name: "Pasta2"
-    }
-  ];
+  const folders = useStore((state)=>state.folders);
 
   return (
     <div className="space-y-2"> 
@@ -35,6 +26,7 @@ export function Folders() {
         <Folder 
             open={isOpen}
             onOpenChange={setIsOpen}
+            folder={folder.id}
         />        
         </>
       ))}
