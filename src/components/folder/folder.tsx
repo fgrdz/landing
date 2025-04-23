@@ -1,8 +1,14 @@
-
-import { useStore } from "@/hooks/store";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
-import Block from "../block/block";
-import { useMemo } from "react";
+import { useStore } from '@/hooks/store';
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '../ui/dialog';
+import Block from '../block/block';
+import { useMemo } from 'react';
 import { shallow } from 'zustand/shallow';
 
 interface FolderProps {
@@ -14,29 +20,28 @@ interface FolderProps {
 export default function Folder({ folder, open, onOpenChange }: FolderProps) {
   const allBookmarks = useStore((state) => state.bookmarks);
   const bookmarks = useMemo(
-    () => allBookmarks.filter((item) => shallow(item.folderId,folder)),
+    () => allBookmarks.filter((item) => shallow(item.folderId, folder)),
     [allBookmarks, folder]
   );
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-      </DialogTrigger>
+      <DialogTrigger asChild></DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="font-sans">Nome da pasta</DialogTitle>
           <DialogDescription>
-            {bookmarks.map((item)=>
+            {bookmarks.map((item) => (
               <Block
-                key={item.id} 
+                key={item.id}
                 title={item.title}
                 url={item.url}
                 description={item.description}
                 lastModification={item.lastModification}
               />
-            )}
+            ))}
           </DialogDescription>
-        </DialogHeader>        
+        </DialogHeader>
       </DialogContent>
     </Dialog>
   );

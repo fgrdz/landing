@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
@@ -8,21 +8,27 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose,
-  DialogFooter
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { useStore } from "@/hooks/store";
-import { Select, SelectContent,SelectValue,SelectTrigger, SelectItem } from "../ui/select";
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { useStore } from '@/hooks/store';
+import {
+  Select,
+  SelectContent,
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+} from '../ui/select';
 
 export function CreateBookmark() {
   const addBookmark = useStore((state) => state.addBookmark);
-  const folders = useStore((state)=> state.folders);
+  const folders = useStore((state) => state.folders);
 
   const [formData, setFormData] = useState({
-    title: "",
-    url: "",
-    description: "",
-    folderId: "default" 
+    title: '',
+    url: '',
+    description: '',
+    folderId: 'default',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,27 +37,24 @@ export function CreateBookmark() {
       title: formData.title,
       url: formData.url,
       description: formData.description,
-      folderId: formData.folderId
+      folderId: formData.folderId,
     });
     document.getElementById('close-dialog')?.click();
-    setFormData({title: "",
-      url: "",
-      description: "",
-      folderId: "default" })
+    setFormData({ title: '', url: '', description: '', folderId: 'default' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
 
   const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      folderId: value
+      folderId: value,
     }));
   };
 
@@ -62,7 +65,7 @@ export function CreateBookmark() {
           Criar bookmark
         </Button>
       </DialogTrigger>
-      
+
       <DialogContent className="sm:max-w-md">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
@@ -71,7 +74,7 @@ export function CreateBookmark() {
               Adicione um novo bookmark à sua coleção
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="space-y-4 mt-4">
             <div>
               <label htmlFor="title" className="block text-sm font-medium mb-1">
@@ -86,7 +89,7 @@ export function CreateBookmark() {
                 required
               />
             </div>
-            
+
             <div>
               <label htmlFor="url" className="block text-sm font-medium mb-1">
                 URL*
@@ -102,7 +105,10 @@ export function CreateBookmark() {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium mb-1">
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium mb-1"
+              >
                 Descrição
               </label>
               <Input
@@ -115,24 +121,28 @@ export function CreateBookmark() {
             </div>
 
             <div>
-              <label htmlFor="folder" className="block text-sm font-medium mb-1">
+              <label
+                htmlFor="folder"
+                className="block text-sm font-medium mb-1"
+              >
                 Pasta
               </label>
-              <Select value={formData.folderId} onValueChange={handleSelectChange}>
+              <Select
+                value={formData.folderId}
+                onValueChange={handleSelectChange}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione uma pasta"></SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  {folders.map((folder)=>
-                     <SelectItem value={folder.id}>
-                        {folder.name}
-                     </SelectItem>
-                  )}
+                  {folders.map((folder) => (
+                    <SelectItem value={folder.id}>{folder.name}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
           </div>
-          
+
           <DialogFooter className="mt-6">
             <DialogClose asChild>
               <Button id="close-dialog" type="button" variant="outline">

@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -179,13 +179,12 @@
 
 @layer utilities {
   .no-scroll-arrows::-webkit-scrollbar-button {
-    display: none; 
+    display: none;
     width: 0;
     height: 0;
   }
-  
+
   .no-scroll-arrows::-webkit-scrollbar {
-    width: 0px; 
+    width: 0px;
   }
-  
 }
