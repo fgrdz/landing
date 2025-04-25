@@ -36,6 +36,7 @@ export default function BlocksVisualizer() {
                 )
                 .map((block) => (
                   <Block
+                    id={block.id}
                     key={block.id}
                     title={block.title}
                     url={block.url}

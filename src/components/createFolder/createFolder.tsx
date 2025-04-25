@@ -22,7 +22,8 @@ export default function CreateFolder() {
         name: '',
     });
 
-    const handleSubmit = ()=>{
+    const handleSubmit = (e: React.FormEvent)=>{
+        e.preventDefault()
         addFolder({
             name: formData.name
         })
@@ -40,7 +41,7 @@ export default function CreateFolder() {
         <div>
         <Dialog>
             <DialogTrigger asChild className="w-[120px] self-end cursor-pointer">
-            <Button variant={'secondary'} size={'icon'}>
+            <Button variant={'default'} size={'icon'}>
                 <PlusIcon />
             </Button>
             </DialogTrigger>
