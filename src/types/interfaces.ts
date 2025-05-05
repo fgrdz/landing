@@ -16,7 +16,9 @@ export interface AppState {
   folders: IFolder[];
   bookmarks: IBookmark[];
   addFolder: (folder: Omit<IFolder, 'id'>) => void;
+  setBookmarks: (bookmarks: IBookmark[])=>void;
   addBookmark: (bookmark: Omit<IBookmark, 'id' | 'lastModification'>) => void;
   deleteFolder: (id: string) => void;
   deleteBookmark: (id: string) => void;
+
 }

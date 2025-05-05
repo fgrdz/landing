@@ -19,10 +19,11 @@ import {
   SelectTrigger,
   SelectItem,
 } from '../ui/select';
+import BookmarksApi from '@/apis/bookmarksApi';
 
 export function CreateBookmark() {
-  const addBookmark = useStore((state) => state.addBookmark);
   const folders = useStore((state) => state.folders);
+  const addBookmark = useStore((state)=> state.addBookmark);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -31,14 +32,29 @@ export function CreateBookmark() {
     folderId: 'default',
   });
 
+
+  const postBookmark = async () => {
+    try {
+      const created = await BookmarksApi.createBookmark({
+        title: formData.title,
+        url: formData.url,
+        description: formData.description,
+      });
+  
+      addBookmark({
+        title: created.title,
+        url: created.url,
+        description: created.description,
+      });
+  
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addBookmark({
-      title: formData.title,
-      url: formData.url,
-      description: formData.description,
-      folderId: formData.folderId,
-    });
+    postBookmark();
     document.getElementById('close-dialog')?.click();
     setFormData({ title: '', url: '', description: '', folderId: 'default' });
   };

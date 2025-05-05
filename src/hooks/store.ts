@@ -8,40 +8,7 @@ export const useStore = create<AppState>((set) => ({
     { id: 'default', name: 'Geral' },
   ],
 
-  bookmarks: [
-    {
-      id: '1',
-      title: 'Titulo',
-      url: 'Conteúdo aqui',
-      description: 'Descricao',
-      folderId: 'Pasta1',
-      lastModification: '2025-04-08T14:30:00.000Z',
-    },
-    {
-      id: '2',
-      title: 'Titulo2',
-      url: 'Conteúdo aqui2',
-      description: 'Descricao2',
-      folderId: 'Pasta2',
-      lastModification: '2025-04-01T14:30:00.000Z',
-    },
-    {
-      id: '3',
-      title: 'Titulo3',
-      url: 'Conteúdo aqui2',
-      description: 'Descricao2',
-      folderId: 'Pasta1',
-      lastModification: '2025-04-09T14:30:00.000Z',
-    },
-    {
-      id: '4',
-      title: 'Titulo4',
-      url: 'Conteúdo aqui2',
-      description: 'Descricao2',
-      folderId: 'default',
-      lastModification: '2024-11-15T14:30:00.000Z',
-    },
-  ],
+  bookmarks: [],
 
   // Actions
   addFolder: (folder) =>
@@ -49,6 +16,17 @@ export const useStore = create<AppState>((set) => ({
       folders: [...state.folders, { ...folder, id: Date.now().toString() }],
     })),
 
+
+    setBookmarks: (apiBookmarks) => 
+      set({ 
+        bookmarks: apiBookmarks.map(bookmark => ({
+          ...bookmark,
+          id: String(bookmark.id),
+          lastModification: new Date().toISOString(), 
+          folderId: bookmark.folderId || 'default' 
+        }))
+      }),
+  
   addBookmark: (bookmark) =>
     set((state) => ({
       bookmarks: [

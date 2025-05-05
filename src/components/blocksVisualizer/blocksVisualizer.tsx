@@ -3,9 +3,29 @@ import { Tabs, TabsList, TabsTrigger } from '../ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { Folders } from '../folders/folders';
 import { useStore } from '@/hooks/store';
+import { useEffect, useRef } from 'react';
+import BookmarksApi from '@/apis/bookmarksApi';
 
 export default function BlocksVisualizer() {
   const blocks = useStore((state) => state.bookmarks);
+  const addBookmarks = useStore((state)=>state.setBookmarks);
+  const hasFetched = useRef(false); 
+
+  const getBookmarks = async () => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    try {
+      const response = await BookmarksApi.getBookmarks();
+      addBookmarks(response);    
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getBookmarks();
+  }, []);
 
   return (
     <div className="space-y-2 relative">
