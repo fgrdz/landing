@@ -64,6 +64,11 @@ export default function BlocksVisualizer() {
                     lastModification={block.lastModification}
                   />
                 ))}
+                {blocks.length === 0 && (
+                  <div className="flex m-3 items-center justify-center h-full text-foreground/50">
+                    Comece a criar cards para começar a visualizá-los aqui
+                  </div>
+                )}
             </TabsContent>
             {/* folders */}
             <TabsContent value="folders">
@@ -72,11 +77,6 @@ export default function BlocksVisualizer() {
           </Tabs>
         </div>
 
-        {blocks.length === 0 && (
-          <div className="flex items-center justify-center h-full text-foreground/50">
-            Comece a criar cards para começar a visualizá-los aqui
-          </div>
-        )}
       </div>
     </div>
   );
