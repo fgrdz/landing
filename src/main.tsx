@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import Home from './components/home/home.tsx';
 import {createBrowserRouter, RouterProvider } from "react-router";
-import BlankPage from './blankPage.tsx';
+import LoginPage from './components/login/login.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/um',
-        element: <BlankPage/>
+        path: '/login',
+        element: <LoginPage/>
       }
     ],
   },
