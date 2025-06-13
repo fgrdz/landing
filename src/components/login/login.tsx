@@ -1,8 +1,40 @@
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { useNavigate } from "react-router";
+import BookmarksApi from '@/apis/bookmarksApi';
+import { useState } from "react";
 
 export default function LoginPage (){
+    const navigate = useNavigate();
+    const [loginData, setLoginData] =  useState({
+        email: '',
+        senha: ''
+    })
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const {id,value} = e.target;
+
+        setLoginData((prev) => ({
+            ...prev,
+            [id]: value,
+        }));
+    }
+    const handleLogin = async (e:React.FormEvent)=>{
+        e.preventDefault();
+        try{
+            const response = await BookmarksApi.login({email: loginData.email, password: loginData.senha});
+            
+            if(response){
+                localStorage.setItem('authToken', response.access_token);
+                console.log('Succefully login');
+                navigate('/')
+            }
+        }catch(error){
+            console.log(error);
+        }
+    };
+
     return(
         <div className="w-3xl h-8/12 flex flex-col  bg-background shadow-3xl rounded p-8 gap-3">
             <div className="flex justify-center font-bold font-sans text-2xl mb-4">
@@ -14,7 +46,7 @@ export default function LoginPage (){
                     <Input
                         id="email"
                         type="email"
-                        
+                        onChange={handleChange}
                         placeholder="Digite o seu e-mail"
                         required
                     />
@@ -24,18 +56,25 @@ export default function LoginPage (){
                     <Input
                         id="senha"
                         type="password"
-                        
+                        onChange={handleChange}
                         placeholder="Digite sua senha"
                         required
                     />
                 </div>
-                <Button className="w-full mt-8 cursor-pointer" type="submit" variant="default">Entrar</Button>
+                <Button className="w-full mt-8 cursor-pointer" type="submit" variant="default" onClick={(e)=>handleLogin(e)}>Entrar</Button>
             </form>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t mt-8">
                 <span className="bg-background text-muted-foreground relative z-10 px-2">Não tem uma conta?</span>
             </div>
             <div className="flex justify-center">
-                <Button className="w-3xs mt-8 cursor-pointer" type="button" variant="outline">Registre-se</Button>
+                <Button 
+                    className="w-3xs mt-8 cursor-pointer" 
+                    type="button" 
+                    variant="outline" 
+                    onClick={()=>navigate('/register')}
+                >
+                    Registre-se
+                </Button>
             </div>
         </div>
     )
