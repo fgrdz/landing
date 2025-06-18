@@ -3,7 +3,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useNavigate } from "react-router";
 import BookmarksApi from '@/apis/bookmarksApi';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import GoogleIcon from '../../assets/icons8-google.svg';
 
 export default function LoginPage (){
     const navigate = useNavigate();
@@ -33,6 +34,9 @@ export default function LoginPage (){
         }catch(error){
             console.log(error);
         }
+    };
+    const handleGoogleLogin = () => {
+        BookmarksApi.initiateGoogleLogin();
     };
 
     return(
@@ -64,16 +68,17 @@ export default function LoginPage (){
                 <Button className="w-full mt-8 cursor-pointer" type="submit" variant="default" onClick={(e)=>handleLogin(e)}>Entrar</Button>
             </form>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t mt-8">
-                <span className="bg-background text-muted-foreground relative z-10 px-2">Não tem uma conta?</span>
+                <span className="bg-background text-muted-foreground relative z-10 px-2">Ou entre com</span>
             </div>
             <div className="flex justify-center">
                 <Button 
                     className="w-3xs mt-8 cursor-pointer" 
                     type="button" 
                     variant="outline" 
-                    onClick={()=>navigate('/register')}
+                    onClick={handleGoogleLogin}
                 >
-                    Registre-se
+                    <img className="w-[20px] h-[20px]" src={GoogleIcon}></img>
+                    Google
                 </Button>
             </div>
         </div>

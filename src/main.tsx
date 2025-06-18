@@ -6,6 +6,8 @@ import Home from './components/home/home.tsx';
 import {createBrowserRouter, RouterProvider } from "react-router";
 import LoginPage from './components/login/login.tsx';
 import SignUpPage from './components/signup/signup.tsx';
+import GoogleCallbackPage from './components/googleLogin/googleLoginCallback.tsx';
+import ProtectedRoute from './components/protectedRoute/protectedRoute.tsx';
 
 const router = createBrowserRouter([
   {
@@ -13,8 +15,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <Home />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: '/',
+            element: <Home />,
+          },
+        ]
       },
       {
         path: '/login',
@@ -23,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <SignUpPage/>
+      },
+      {
+        path: 'auth/callback',
+        element: <GoogleCallbackPage/>
       }
     ],
   },

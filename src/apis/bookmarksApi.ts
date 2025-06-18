@@ -63,6 +63,7 @@ const BookmarksApi = {
     }
   },
 
+  
   async register(userData: {
     email: string;
     password: string;
@@ -76,6 +77,45 @@ const BookmarksApi = {
       throw error;
     }
   },
+  async initiateGoogleLogin() {
+    try {
+      window.location.href = `${API_BASE_URL}/auth/google`;
+    } catch (error) {
+      console.error('Google login initiation error:', error);
+      throw error;
+    }
+  },
+
+  async handleGoogleCallback(token: string) {
+    try {
+      localStorage.setItem('access_token', token);
+      return { success: true };
+    } catch (error) {
+      console.error('Google callback handling error:', error);
+      throw error;
+    }
+  },
+
+  async logout() {
+    try {
+      localStorage.removeItem('access_token');
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
+  },
+
+  async getCurrentUser() {
+    try {
+      const response = await api.get('/auth/me');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching current user:', error);
+      throw error;
+    }
+  }
 };
+
 
 export default BookmarksApi;
