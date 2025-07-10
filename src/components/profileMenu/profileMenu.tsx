@@ -1,3 +1,4 @@
+import EditProfile from "../editProfile/editProfile";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
@@ -17,7 +18,7 @@ export default function ProfileMenu (){
                         Editar avatar
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        Editar perfil
+                        <EditProfile/>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator></DropdownMenuSeparator>
                     <DropdownMenuItem>
