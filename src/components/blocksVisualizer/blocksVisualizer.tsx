@@ -5,6 +5,7 @@ import { Folders } from '../folders/folders';
 import { useStore } from '@/hooks/store';
 import { useEffect, useRef } from 'react';
 import BookmarksApi from '@/apis/bookmarksApi';
+import EditProfile from '../editProfile/editProfile';
 
 export default function BlocksVisualizer() {
   const blocks = useStore((state) => state.bookmarks);
@@ -40,7 +41,6 @@ export default function BlocksVisualizer() {
               <TabsTrigger value="folders">Pastas</TabsTrigger>
               <TabsTrigger value="archived">Arquivados</TabsTrigger>
             </TabsList>
-
             <TabsContent value="recent">
               {blocks
                 .filter(
